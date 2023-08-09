@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="card">
+    <div class="card-header">Crop Image File</div>
+    <div class="card-body">
+        <div id="cropper1"></div>
+        <input type="file" id="BrowseFile" class="form-control" accept="image/*">
+        <button id="btnupload" style="margin-top: 10px;" class="btn btn-success">Crop</button>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+    <script>
+        function setupCropper() {
+            var basic = $('#cropper1').croppie({
+                viewport: {
+                    width: 300,
+                    height: 300
+                },
+                boundary: {
+                    width: 800,
+                    height: 500
+                },
+                showZoomer: true,
+                url: "/DefaultImages/preview.jpg",
+                format: "png" // 'jpeg' | 'png' | 'webp'
+            });
+
+            function readFile(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        basic.croppie('bind', {
+                            url: e.target.result
+                        });
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $('#BrowseFile').on('change', function () {
+                readFile(this);
+            });
+
+            $('#btnupload').on('click', function () {
+                basic.croppie('result', 'blob').then(function (blob) {
+                    var formData = new FormData();
+                    formData.append('filename', 'FileName.png');
+                    formData.append('blob', blob);
+
+                    var myAppUrlSettings = {
+                        MyUsefulUrl: '@Url.Action("SaveCropedImage", "Home")'
+                    };
+
+                    var request = new XMLHttpRequest();
+                    request.open('POST', myAppUrlSettings.MyUsefulUrl);
+                    request.send(formData);
+
+                    request.onreadystatechange = function () {
+                        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                            var response = JSON.parse(request.responseText);
+
+                            if (response.message === "ok") {
+                                alert('Photo Cropped Successfully!');
+                                window.location.reload();
+                            }
+                            if (response.message === "Error") {
+                                window.location.reload();
+                            }
+                        }
+                    };
+                });
+            });
+        }
+
+        // Call the setupCropper function when the DOM is ready
+        $(document).ready(function () {
+            setupCropper();
+        });
+    </script>
+}

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CropedImage", "CropedImage\CropedImage.csproj", "{8B50EC0F-37C3-4DD2-8B4B-09814166C09F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B50EC0F-37C3-4DD2-8B4B-09814166C09F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B50EC0F-37C3-4DD2-8B4B-09814166C09F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B50EC0F-37C3-4DD2-8B4B-09814166C09F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B50EC0F-37C3-4DD2-8B4B-09814166C09F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3CAB6E0E-E790-4DF3-8A75-C9A158440BC3}
+	EndGlobalSection
+EndGlobal
